@@ -1,0 +1,5 @@
+# To ignore ipynb checkpoints
+.ipynb_checkpoints
+
+# To ignore images taken by faceRecognition program
+/Task-6/faces/user/*.jpg
