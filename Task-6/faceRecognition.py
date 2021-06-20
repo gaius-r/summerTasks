@@ -6,7 +6,44 @@
 
 import cv2
 import numpy as np
+import smtplib, ssl
+import pywhatkit
 
+
+# ## Functions to send mail and WhatsApp message if Face is recognized
+
+# In[ ]:
+
+
+def sendMail(sender_email, password):
+    port = 465  # For SSL
+    
+    # Setting other required parameters
+    smtp_server = "smtp.gmail.com"
+    receiver_email = "gaiusreji11@gmail.com"
+    message = """Subject: Face ID Verified
+
+    Greetings Gaius Reji
+
+    - Python
+    """
+    # Create a secure SSL context
+    context = ssl.create_default_context()
+
+    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+        server.login(sender_email, password)
+        server.sendmail(sender_email, receiver_email, message)
+
+
+# In[ ]:
+
+
+def sendWhatsMessage(phoneno):
+    message = "Hey ... i sent this using python lol , just testing some stuff out , please ignore"
+    pywhatkit.sendwhatmsg_instantly(phoneno, message)
+
+
+# ## Face Extractor
 
 # In[ ]:
 
@@ -17,8 +54,6 @@ face_detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 # Setting file path for storing and retrieving data
 path = './faces/user/'
 
-
-# ## Face Extractor
 
 # In[ ]:
 
@@ -43,13 +78,13 @@ def face_extractor(frame):
 
 
 cap = cv2.VideoCapture(0)
-count = 0
+count = 500    # size of sample (number of images needed)
 
 while True:
     ret, frame = cap.read()
     face = face_extractor(frame)
     if face is not None:
-        count += 1
+        count -= 1
         face = cv2.resize(face, (200, 200))
         face = cv2.cvtColor(face, cv2.COLOR_BGR2GRAY)
         
@@ -64,7 +99,7 @@ while True:
         print("Face not found")
         pass
     
-    if cv2.waitKey(10) == 13 or count == 500:
+    if cv2.waitKey(10) == 13 or count <= 0:
         break
         
 cv2.destroyAllWindows()
@@ -139,6 +174,7 @@ def detect_face(frame, size=0.5):
 
 
 cap = cv2.VideoCapture(0)
+correction = 50 # Number of times the user's face must bre read correctly before sending the mail
 while True:
     ret, frame = cap.read()
     face = detect_face(frame)
@@ -157,12 +193,27 @@ while True:
         
         if confidence > 90:
             cv2.putText(frame, "Hey Gaius", (276, 430), cv2.FONT_HERSHEY_SIMPLEX, 0.5, [178, 255, 25], 1)
+            c += 1
+            if c >= correction:
+                # Fetching credentials
+                creds = open("password.txt", "r")
+                sender_email = creds.readline()
+                password = creds.readline()
+                phoneno = creds.readline()
+                creds.close()
+                sendMail(sender_email, password)
+                print("Email sent")
+                sendWhatsMessage(phoneno)
+                print("WhatsApp message sent")
+                break
         else:
             cv2.putText(frame, "Face not recognized", (240, 430), cv2.FONT_HERSHEY_SIMPLEX, 0.5, [80,19,247], 1)
+            c = 0
         
     except:
         cv2.putText(frame, "Face not found", (260, 430), cv2.FONT_HERSHEY_SIMPLEX, 0.5, [255,255,255], 1)
         cv2.putText(frame, "Looking for a face", (250, 450), cv2.FONT_HERSHEY_SIMPLEX, 0.5, [255,255,255], 1)
+        c = 0
     cv2.imshow('Face Recognition', frame)
         
     if cv2.waitKey(10) == 13:
