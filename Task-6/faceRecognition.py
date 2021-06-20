@@ -15,18 +15,12 @@ import pywhatkit
 # In[ ]:
 
 
-def sendMail(sender_email, password):
+def sendMail(sender_email, password, receiver_email, message):
     port = 465  # For SSL
     
-    # Setting other required parameters
+    # Setting smtp server
     smtp_server = "smtp.gmail.com"
-    receiver_email = "gaiusreji11@gmail.com"
-    message = """Subject: Face ID Verified
-
-    Greetings Gaius Reji
-
-    - Python
-    """
+    
     # Create a secure SSL context
     context = ssl.create_default_context()
 
@@ -38,7 +32,7 @@ def sendMail(sender_email, password):
 # In[ ]:
 
 
-def sendWhatsMessage(phoneno):
+def sendWhatsMessage(phoneno, message):
     message = "Hey ... i sent this using python lol , just testing some stuff out , please ignore"
     pywhatkit.sendwhatmsg_instantly(phoneno, message)
 
@@ -195,15 +189,25 @@ while True:
             cv2.putText(frame, "Hey Gaius", (276, 430), cv2.FONT_HERSHEY_SIMPLEX, 0.5, [178, 255, 25], 1)
             c += 1
             if c >= correction:
-                # Fetching credentials
+                # Fetching from_email, password, to_email, phone_number
                 creds = open("password.txt", "r")
                 sender_email = creds.readline()
                 password = creds.readline()
+                receiver_email = creds.readline()
                 phoneno = creds.readline()
                 creds.close()
-                sendMail(sender_email, password)
+                
+                message = """Subject: Face ID Verified
+
+                Greetings Gaius Reji
+                """
+                
+                # Calling function to send Email
+                sendMail(sender_email, password, receiver_email, message)
                 print("Email sent")
-                sendWhatsMessage(phoneno)
+                
+                # Calling function to send WhatsApp Message
+                sendWhatsMessage(phoneno, message)
                 print("WhatsApp message sent")
                 break
         else:
