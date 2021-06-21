@@ -43,7 +43,8 @@ def sendWhatsMessage(phoneno, message="Hello from Python"):
 # In[ ]:
 
 
-# You can use this function to create a key pair if it does not exist already
+# You can use this function to create a key pair if it does not exist already.
+# Remember to call the function in createEC2Instance() before creating the instance itself.
 
 # def create_key_pair():
 #     ec2 = boto3.resource('ec2')
@@ -57,6 +58,7 @@ def createEC2Instance():
     image = 'ami-06a0b4e3b7eb7a300'
     instType = 't2.micro'
     secGroup = 'default'
+#    create_key_pair()
     keyPair = 'testKey'
     
     ec2 = boto3.resource('ec2')
