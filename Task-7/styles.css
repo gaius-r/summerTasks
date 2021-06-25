@@ -1,0 +1,34 @@
+html {
+    font-size: 62.5%;
+}
+
+body {
+    background-color: #101010;
+    color: #34eba5;
+    font-family: 'Fira Code', monospace;
+    font-size: 1.3rem;
+}
+
+#startdiv {
+    margin: auto;
+    position: absolute;
+    left: 50%; top: 50%; 
+    transform: translate(-50%, -50%);
+}
+
+#startbtn {
+    margin: auto;
+    font-family: 'Fira Code', monospace;
+    font-size: 3.5rem;
+    background-color: transparent;
+    color: whitesmoke;
+    border: 0.15em solid whitesmoke;
+    padding: 0.8em;
+    transition: 0.4s;
+}
+
+#startbtn:hover {
+    color: #34eba5;
+    border-color: #34eba5;
+    cursor: pointer;
+}
