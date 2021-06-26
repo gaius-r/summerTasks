@@ -5,17 +5,20 @@ window.onload = () => {
 function readInput(el, e) {
     if (e.keyCode == 13) {
         e.preventDefault();
-        cmd = 'docker ' + el.value;
+        //cmd = 'docker ' + el.value;
+        cmd = el.value;
         console.log(cmd);
-        el.blur()
+        dockercon(cmd)
     }
 }
 
-function dockercon() {
+function dockercon(cmd) {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://192.168.0.132/cgi-bin/sample.py", false);
+    xhr.open("GET", "http://192.168.0.132/cgi-bin/docker-cgi.py?cmd="+cmd, true);
     xhr.send();
-    response = xhr.responseText;
-    output = document.getElementsByClassName("output")[0]
-    output.innerHTML = "> Hello world";
+    xhr.onload = () => {
+        response = xhr.responseText;
+        output = document.getElementsByClassName("output")[0]
+        output.innerHTML = response;
+    }
 }
