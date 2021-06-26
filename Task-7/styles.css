@@ -32,3 +32,44 @@ body {
     border-color: #34eba5;
     cursor: pointer;
 }
+
+.console-div {
+    margin: auto;
+    position: absolute;
+    left: 50%; top: 50%; 
+    transform: translate(-50%, -50%);
+    border: 0.2em solid #34eba5;
+    width: 50%;
+    min-height: 30rem;
+    max-width: 100%;
+    overflow-y: auto;
+    font-size: 1.5rem;
+    padding: 0.5em;
+    z-index: 100;
+}
+
+.inp-out {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #34eba5;
+    font-size: inherit;
+    font-family: inherit;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    resize: none;
+}
+
+.input {
+    width: calc(100% - 9ch);
+    white-space: initial;
+    min-height: 5em;
+}
+
+label .input{
+    vertical-align: top;
+}
