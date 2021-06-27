@@ -5,6 +5,7 @@ html {
 body {
     background-color: #101010;
     font-family: 'Fira Code', monospace;
+    font-weight: 500;
 }
 
 #startdiv {
@@ -62,6 +63,7 @@ body {
     width: calc(100% - 9ch);
     white-space: initial;
     min-height: 5em;
+    font-weight: 300;
 }
 
 label .input{
@@ -78,6 +80,10 @@ hr {
 .output {
     overflow-x: auto;
     overflow-y: scroll;
-    height: 30em;
+    height: 20em;
+}
+
+pre {
     font-family: 'Fira Code', monospace;
+    font-weight: 300;
 }
