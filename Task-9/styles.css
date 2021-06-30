@@ -1,0 +1,96 @@
+html {
+    font-size: 62.5%;
+}
+
+body {
+    background-color: #101010;
+    font-family: 'Fira Code', monospace;
+    font-weight: 500;
+}
+
+#startdiv {
+    margin: auto;
+    position: absolute;
+    left: 50%; top: 50%; 
+    transform: translate(-50%, -50%);
+}
+
+#startbtn {
+    margin: auto;
+    font-family: 'Fira Code', monospace;
+    font-size: 3.5rem;
+    background-color: transparent;
+    color: whitesmoke;
+    border: 0.15em solid whitesmoke;
+    padding: 0.8em;
+    transition: 0.4s;
+}
+
+#startbtn:hover {
+    color: #34eba5;
+    border-color: #34eba5;
+    cursor: pointer;
+}
+
+.console-div {
+    margin: auto;
+    position: absolute;
+    left: 50%; top: 50%; 
+    transform: translate(-50%, -50%);
+    border: 0.2em solid #66ffff;
+    width: 60%;
+    font-size: 1.6rem;
+    padding: 0.5em;
+}
+
+.inp-out {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #66ffff;
+    font-size: inherit;
+    font-family: inherit;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    resize: none;
+    -ms-overflow-style: none; /* Hide scrollbar in IE and Edge */
+    scrollbar-width: none; /* Hide scrollbar in Firefox */
+}
+
+/* Hide scrollabar for Chrome, Safari, and Opera*/
+.inp-out::-webkit-scrollbar {
+    display: none;
+}
+
+.input {
+    width: calc(100% - 11ch);
+    white-space: initial;
+    min-height: 5em;
+    font-weight: 300;
+}
+
+label .input{
+    vertical-align: top;
+}
+
+hr {
+    background: #66ffff;
+    min-height: 1px;
+    height: 0.05em;
+    border: none;
+}
+
+.output {
+    overflow-x: auto;
+    overflow-y: auto;
+    height: 25em;
+}
+
+pre {
+    font-family: 'Fira Code', monospace;
+    font-weight: 300;
+}
