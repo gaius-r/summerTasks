@@ -32,7 +32,7 @@ function readInput(el, e) {
 
 function dockercon(cmd) {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://192.168.0.132/cgi-bin/docker-cgi.py?cmd="+cmd, true);
+    xhr.open("GET", "http://192.168.56.104/cgi-bin/docker-cgi.py?cmd="+cmd, true);
     xhr.send();
     xhr.onload = () => {
         response = xhr.responseText;
