@@ -7,12 +7,19 @@ import 'package:simple_ui/activities/register.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MaterialApp(
-    initialRoute: "home",
-    routes: {
-      "home": (context) => MyHome(),
-      "register": (context) => MyRegister(),
-      "login": (context) => MyLogin(),
-    },
-  ));
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      initialRoute: "home",
+      routes: {
+        "home": (context) => MyHome(),
+        "register": (context) => MyRegister(),
+        "login": (context) => MyLogin(),
+      },
+    );
+  }
 }
