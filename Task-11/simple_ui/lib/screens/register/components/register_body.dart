@@ -12,9 +12,20 @@ class Body extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  bool _checkPasswordMatch(String pass, String conpass) {
+    if (pass == conpass) {
+      print("passwords match");
+      return true;
+    } else {
+      print("passwords do not match");
+      return false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    String email = "", password = "", confirmpass = "";
     return Background(
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 40),
@@ -43,17 +54,32 @@ class Body extends StatelessWidget {
                   color: kPrimaryColor,
                 ),
                 hint: "Your Email",
-                onChange: (value) {},
+                onChange: (value) {
+                  email = value;
+                },
               ),
               RoundedPasswordField(
-                onChange: (value) {},
+                onChange: (value) {
+                  password = value;
+                },
               ),
               RoundedPasswordField(
-                onChange: (value) {},
+                onChange: (value) {
+                  confirmpass = value;
+                  _checkPasswordMatch(password, confirmpass);
+                },
                 hint: "Confirm Password",
               ),
               RoundedButton(
-                press: () async {},
+                press: () async {
+                  bool usercreated = await signUp(email, password);
+                  if (usercreated) {
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, "home", (route) => false);
+                  } else {
+                    print("Failed to create account. Try again");
+                  }
+                },
                 text: "SIGN UP",
                 color: Colors.grey.shade700,
                 pressColor: Colors.black87,
@@ -72,5 +98,19 @@ class Body extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class InputListener extends StatefulWidget {
+  const InputListener({Key? key}) : super(key: key);
+
+  @override
+  _InputListenerState createState() => _InputListenerState();
+}
+
+class _InputListenerState extends State<InputListener> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }

@@ -4,6 +4,7 @@ import 'package:simple_ui/components/rounded_button.dart';
 import 'package:simple_ui/components/rounded_input_field.dart';
 import 'package:simple_ui/components/rounded_password_field.dart';
 import 'package:simple_ui/constants.dart';
+import 'package:simple_ui/screens/authentication/firebase_auth.dart';
 import 'package:simple_ui/screens/login/components/login_background.dart';
 
 class Body extends StatelessWidget {
@@ -14,6 +15,7 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    String email = "", password = "";
     return Background(
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 40),
@@ -42,13 +44,25 @@ class Body extends StatelessWidget {
                   color: kPrimaryColor,
                 ),
                 hint: "Your Email",
-                onChange: (value) {},
+                onChange: (value) {
+                  email = value;
+                },
               ),
               RoundedPasswordField(
-                onChange: (value) {},
+                onChange: (value) {
+                  password = value;
+                },
               ),
               RoundedButton(
-                press: () {},
+                press: () async {
+                  bool userlogged = await signIn(email, password);
+                  if (userlogged) {
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, "home", (route) => false);
+                  } else {
+                    print("Failed to login. Try again");
+                  }
+                },
                 text: "LOGIN",
                 color: Colors.grey.shade700,
                 pressColor: Colors.black87,
