@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_ui/constants.dart';
+import 'package:simple_ui/screens/home/home_screen.dart';
 import 'package:simple_ui/screens/login/loginScreen.dart';
 import 'package:simple_ui/screens/register/registerScreen.dart';
 import 'package:simple_ui/screens/welcome/welcomeScreen.dart';
@@ -21,11 +22,12 @@ class MyApp extends StatelessWidget {
         primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: Colors.white,
       ),
-      initialRoute: "home",
+      initialRoute: "welcome",
       routes: {
-        "home": (context) => WelcomeScreen(),
+        "welcome": (context) => WelcomeScreen(),
         "login": (context) => LoginScreen(),
         "register": (context) => RegisterScreen(),
+        "home": (context) => HomeScreen(),
       },
     );
   }
